@@ -23,7 +23,7 @@ def purge():
     try:
         purgeMS = check_call(['java', '-jar', os.path.join(purge_path, jar_file)])
         if purgeMS == 0:
-            ds = input('\nWould you like to go back to Fraud Menu? (y/n): ')
+            ds = input('\nWould you like to go back to DoS Menu? (y/n): ')
             if ds == 'y' or ds == 'yes':
                 ss7main.ss7dos()
             elif ds == 'n' or ds == 'no':

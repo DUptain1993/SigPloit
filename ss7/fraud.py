@@ -111,7 +111,7 @@ def isd():
 		if insertSD == 0:
 			fr = input('\nWould you like to go back to Fraud Menu? (y/n): ')
 			if fr == 'y' or fr == 'yes':
-				ss7main.Fraud()
+				ss7main.ss7fraud()
 			elif fr == 'n' or fr == 'no':
 				attack_menu = input('Would you like to choose another attacks category? (y/n): ')
 				if attack_menu == 'y'or attack_menu =='yes':

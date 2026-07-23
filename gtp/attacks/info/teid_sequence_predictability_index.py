@@ -106,9 +106,9 @@ def main(argv=None):
         teids = [int(t.strip(),16) for t in teids]
         
         if len(teids) < 6:
-            print(("Error: File shall contain least six consecutive teids.",
-                   "provided %d")%(len(teids)))
-            return           
+            print("Error: File shall contain least six consecutive teids. "
+                  "provided %d" % (len(teids)))
+            return
         tpi = TeidPredictabilityIndex()
         index, msg = tpi.teidPredictabilityIndex(teids)
         print(("%d, %s")%(index, msg))
@@ -121,8 +121,8 @@ def main(argv=None):
                    "TEID generation.")
             print(common_prefixes)
         else :
-                print(("The algorithm seems to use a all 32 bits for",
-                   "TEID generation."))          
+                print("The algorithm seems to use a all 32 bits for "
+                      "TEID generation.")
        
     except Exception as e:
         indent = len(program_name) * " "

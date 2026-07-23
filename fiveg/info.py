@@ -29,7 +29,7 @@ def _shell(prompt, runner):
             elif choice.startswith('set target'):
                 fivegmain.remote_net = choice.split()[2]
             elif choice.startswith('set listening'):
-                fivegmain.listening = choice.split()[2]
+                fivegmain.listening = choice.split()[2].lower() in ('true', '1', 'yes')
             elif choice.startswith('set verbosity'):
                 fivegmain.verbosity = int(choice.split()[2])
             elif choice.startswith('set output'):

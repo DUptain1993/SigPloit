@@ -8,4 +8,6 @@ import sys
 # ``sys.path`` as soon as the package is imported.
 _GTP_DIR = os.path.dirname(os.path.abspath(__file__))
 if _GTP_DIR not in sys.path:
-    sys.path.insert(0, _GTP_DIR)
+    # Append (rather than insert at 0) so the legacy top-level imports resolve
+    # without shadowing any earlier entries on sys.path.
+    sys.path.append(_GTP_DIR)
