@@ -47,7 +47,7 @@ class PathMgmtListener(threading.Thread):
         self.is_running = True
         while self.sock is not None and self.is_running:
             try:
-                data = self.sock.recvfrom(1024)            
+                data, _ = self.sock.recvfrom(1024)
                 if len(data) > 8 : 
                     print(len(data))                     
                     (flags, msg_type, length, sequence) = struct.unpack("!BBHL", 
