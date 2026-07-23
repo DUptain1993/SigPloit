@@ -1,0 +1,13 @@
+# NRF NF-Discovery (5G SBI / HTTP2) configuration
+# Used by: 5G > Information Gathering > NRF NF Discovery
+[GENERIC]
+scheme = https
+host = 127.0.0.1
+port = 8443
+# OAuth2 access token (leave blank to test unauthenticated discovery)
+token =
+# NF type we claim to be when querying the NRF
+requester_nf_type = AMF
+# TLS certificate verification (lab targets usually use self-signed certs)
+verify_tls = false
+timeout = 10

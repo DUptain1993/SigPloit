@@ -1,0 +1,12 @@
+# NF Unauthorized Access (5G SBI / HTTP2) configuration
+# Used by: 5G > Service Based Architecture (SBA) > NF Unauthorized Access
+[GENERIC]
+scheme = https
+host = 127.0.0.1
+port = 8443
+# Service operation path to probe (e.g. an NRF, UDM or AMF SBI resource)
+service_path = /nnrf-disc/v1/nf-instances?target-nf-type=UDM&requester-nf-type=AMF
+# Optional valid token; if set, a second (authorized) request is also sent
+token =
+verify_tls = false
+timeout = 10

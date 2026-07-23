@@ -5,7 +5,7 @@
 
 # SigPloit
 SigPloit a signaling security testing framework dedicated to Telecom Security professionals and reasearchers to pentest and exploit vulnerabilites in the signaling protocols used in mobile operators regardless of the geneartion being in use.
-SigPloit aims to cover all used protocols used in the operators interconnects SS7, GTP (3G), Diameter (4G) or even SIP for IMS and VoLTE infrastructures used in the access layer and SS7 message encapsulation into SIP-T.
+SigPloit aims to cover all used protocols used in the operators interconnects SS7, GTP (3G), Diameter (4G) or even SIP for IMS and VoLTE infrastructures used in the access layer and SS7 message encapsulation into SIP-T. It also covers the 5G core interconnect: the Service Based Architecture (SBA/HTTP2) and PFCP on the N4 interface.
 Recommendations for each vulnerability will be provided to guide the tester and the operator the steps that should be done to enhance their security posture
 
 SigPloit is developed on several versions
@@ -44,6 +44,25 @@ SigPloit is referenced in GSMA document FS.07 "SS7 and Sigtran Network Security"
   This last Version will introduce the reporting feature. A comprehensive report with the tests done along with the recommendations provided for each vulnerability that has been exploited.
   
     BETA Version of SigPloit will have the Location Tracking attacks of the SS7 phase 1
+
+  Version 6: 5G
+  ------------
+  This Version targets the 5G core network. It covers the two interconnect/roaming
+  attack surfaces of the 5G System:
+
+    A- Service Based Architecture (SBA) over HTTP/2 (SBI)
+       - NRF NF-Discovery: enumerate the network functions (AMF, SMF, UPF, AUSF,
+         UDM, PCF, SEPP, ...) registered in the NRF via Nnrf_NFDiscovery.
+       - NF Unauthorized Access: check whether SBI service operations enforce
+         OAuth2 access-token authorization (TS 33.501).
+
+    B- PFCP on the N4 interface (SMF <-> UPF, UDP 8805)
+       - PFCP Node Discovery: locate reachable UPF/SMF nodes using Heartbeat and
+         Association Setup messages.
+       - PFCP Session DoS: N4 session establishment flooding and session deletion.
+
+  Each attack prints a recommendation to help the operator harden the exposed
+  interface. The 5G SBA attacks require the optional httpx[http2] dependency.
 
 ## Installation and requirements
 The requirements for this project are:

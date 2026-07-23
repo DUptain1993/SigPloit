@@ -1,0 +1,14 @@
+# PFCP Node Discovery (5G N4) configuration
+# Used by: 5G > Information Gathering > PFCP Node Discovery
+#
+# The target host/subnet is set from the attack shell with:  set target <ip|cidr>
+[GENERIC]
+# PFCP UDP port (default 8805)
+port = 8805
+# Node ID advertised by our (spoofed SMF) Association Setup Request
+node_id = 10.0.0.1
+# Node ID type: 0 = IPv4, 1 = IPv6, 2 = FQDN
+node_type = 0
+# per-request reply timeout in seconds
+timeout = 3
+sequence = 1

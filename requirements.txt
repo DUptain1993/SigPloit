@@ -5,3 +5,4 @@ configobj>=5.0.6
 IPy>=1.1
 pysctp>=0.6
 numpy>=1.16
+httpx[http2]>=0.23
