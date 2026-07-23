@@ -73,10 +73,10 @@ class PathMgmtListener(threading.Thread):
                     echo_response = EchoResponse(sequence)
                     if self.is_verbose:   
                         print("%s: Sending GTP ECHO RESPONSE message"%(self.TAG_NAME))
-                    sent_bytes = self.connection.send(echo_response.get_message())
+                    sent_bytes = self.sock.send(echo_response.get_message())
                     if sent_bytes is not None and sent_bytes>0:
                         print("%s: Sent GTP ECHO RESPONSE message"%(self.TAG_NAME))
-                        print("%s: bytes sent %d"%(sent_bytes))
+                        print("%s: bytes sent %d"%(self.TAG_NAME, sent_bytes))
                     else:
                         print("%s: GTP ECHO RESPONSE message not sent"%(self.TAG_NAME))            
             except timeout as e:
