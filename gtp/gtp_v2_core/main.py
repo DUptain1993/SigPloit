@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 #       main.py
 #       
@@ -37,9 +37,9 @@ import sys
 import os
 
 from optparse import OptionParser
-from utilities.configuration_parser import *
-from utilities.gtp_v2_server_listener import ServerListener
-from utilities.gtpv2_sender_listener import SenderListener
+from gtp_v2_core.utilities.configuration_parser import *
+from gtp_v2_core.utilities.gtp_v2_server_listener import ServerListener
+from gtp_v2_core.utilities.gtpv2_sender_listener import SenderListener
 __all__ = []
 __version__ = 0.1
 
@@ -111,7 +111,7 @@ def main(argv=None):
        
         # MAIN BODY #
         if opts.config_file == "" :
-            print "Error: missed config file"
+            print("Error: missed config file")
             return            
         config = parseConfigs(opts.config_file)
  
@@ -122,7 +122,7 @@ def main(argv=None):
         else :
             lstn = SenderListener(None, msgs, remote_ip, is_verbose, msg_freq,
                                   sleep_time)  
-    except Exception, e:
+    except Exception as e:
         indent = len(program_name) * " "
         sys.stderr.write(program_name + ": " + repr(e) + "\n")
         sys.stderr.write(indent + "  for help use --help")

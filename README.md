@@ -5,7 +5,7 @@
 
 # SigPloit
 SigPloit a signaling security testing framework dedicated to Telecom Security professionals and reasearchers to pentest and exploit vulnerabilites in the signaling protocols used in mobile operators regardless of the geneartion being in use.
-SigPloit aims to cover all used protocols used in the operators interconnects SS7, GTP (3G), Diameter (4G) or even SIP for IMS and VoLTE infrastructures used in the access layer and SS7 message encapsulation into SIP-T.
+SigPloit aims to cover all used protocols used in the operators interconnects SS7, GTP (3G), Diameter (4G) or even SIP for IMS and VoLTE infrastructures used in the access layer and SS7 message encapsulation into SIP-T. It also covers the 5G core interconnect: the Service Based Architecture (SBA/HTTP2) and PFCP on the N4 interface.
 Recommendations for each vulnerability will be provided to guide the tester and the operator the steps that should be done to enhance their security posture
 
 SigPloit is developed on several versions
@@ -32,12 +32,33 @@ SigPloit is referenced in GSMA document FS.07 "SS7 and Sigtran Network Security"
   
   Version 3: Diameter
   -----------------
-  This Version will focus on the attacks occurring on the LTE roaming interconnects using Diameter as the signaling protocol.
-  
+  This Version focuses on the attacks occurring on the LTE roaming interconnects using
+  Diameter (S6a/S6d, TS 29.272) as the signaling protocol:
+
+    A- Information Gathering: Peer Discovery (CER/CEA handshake, reports S6a support)
+
+    B- Location Tracking: Authentication-Information-Request (AIR) - retrieves EPS
+       authentication vectors for a subscriber
+
+    C- Interception: Update-Location-Request (ULR) - registers an attacker MME for
+       the subscriber (SMS/data interception)
+
+    D- Denial of Service: Cancel-Location (CLR) / Purge-UE (PUR) - detach a
+       subscriber from the network
+
   Version 4: SIP
   ------------
-  This is Version will be concerned with SIP as the signaling protocol used in the access layer for voice over LTE(VoLTE) and IMS infrastructure.
-  Also, SIP will be used to encapsulate SS7 messages (ISUP) to be relayed over VoIP providers to SS7 networks taking advantage of SIP-T protocol, a protocol extension for SIP to provide intercompatability between VoIP and SS7 networks
+  This Version covers SIP as the signaling protocol used in the access layer for
+  voice over LTE (VoLTE) and IMS infrastructure:
+
+    A- Information Gathering: OPTIONS-based IMS core node discovery, and
+       REGISTER-based subscriber/extension enumeration
+
+    B- Interception: INVITE identity spoofing (forged From / P-Asserted-Identity)
+
+    C- Denial of Service: INVITE flood (call-state exhaustion)
+
+  SIP will also be used to encapsulate SS7 messages (ISUP) to be relayed over VoIP providers to SS7 networks taking advantage of SIP-T protocol, a protocol extension for SIP to provide intercompatability between VoIP and SS7 networks
   
   Version 5: Reporting
   ------------------
@@ -45,10 +66,29 @@ SigPloit is referenced in GSMA document FS.07 "SS7 and Sigtran Network Security"
   
     BETA Version of SigPloit will have the Location Tracking attacks of the SS7 phase 1
 
+  Version 6: 5G
+  ------------
+  This Version targets the 5G core network. It covers the two interconnect/roaming
+  attack surfaces of the 5G System:
+
+    A- Service Based Architecture (SBA) over HTTP/2 (SBI)
+       - NRF NF-Discovery: enumerate the network functions (AMF, SMF, UPF, AUSF,
+         UDM, PCF, SEPP, ...) registered in the NRF via Nnrf_NFDiscovery.
+       - NF Unauthorized Access: check whether SBI service operations enforce
+         OAuth2 access-token authorization (TS 33.501).
+
+    B- PFCP on the N4 interface (SMF <-> UPF, UDP 8805)
+       - PFCP Node Discovery: locate reachable UPF/SMF nodes using Heartbeat and
+         Association Setup messages.
+       - PFCP Session DoS: N4 session establishment flooding and session deletion.
+
+  Each attack prints a recommendation to help the operator harden the exposed
+  interface. The 5G SBA attacks require the optional httpx[http2] dependency.
+
 ## Installation and requirements
 The requirements for this project are:
 
-    1) Python 2.7
+    1) Python 3.6 +
     2) Java version 1.7 +
     3) sudo apt-get install lksctp-tools
     4) Linux machine
@@ -57,6 +97,6 @@ To run use
 
     cd SigPloit
     
-    sudo pip2 install -r requirements.txt
+    sudo pip3 install -r requirements.txt
     
-    python sigploit.py
+    python3 sigploit.py

@@ -1,0 +1,23 @@
+# PFCP Session DoS (5G N4) configuration
+# Used by: 5G > Denial of Service > PFCP Session DoS
+#
+# Target UPF is set from the attack shell with:  set target <upf-ip>
+# Mode is set from the attack shell with:         set mode establish|delete
+[GENERIC]
+port = 8805
+# CP (spoofed SMF) node id / address used in Session Establishment
+node_id = 10.0.0.1
+node_type = 0
+timeout = 3
+sequence = 1
+
+[SESSION]
+# CP F-SEID base value (incremented per message in establish mode)
+cp_seid = 1
+cp_ipv4 = 10.0.0.1
+# optional UE IP address to place in the PDI
+ue_ipv4 = 10.45.0.2
+# base SEID targeted in delete mode (incremented per message)
+seid = 0x0000000000000001
+# number of PFCP messages to send
+count = 100

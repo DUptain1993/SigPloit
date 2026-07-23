@@ -1,0 +1,10 @@
+# SIP OPTIONS Node Discovery configuration
+# Used by: SIP > Information Gathering > OPTIONS Discovery
+#
+# Target host/subnet is set from the attack shell with: set target <ip|cidr>
+[GENERIC]
+port = 5060
+local_host = 10.0.0.1
+local_port = 0
+from_user = sigploit
+timeout = 3

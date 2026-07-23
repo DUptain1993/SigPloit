@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 '''
 GTPv2 Information gathering attacks
 
@@ -17,13 +17,14 @@ import time
 
 from attacks.info import discover_gtp_nodes
 from attacks.info import discover_teid_allocation
+from attacks.info import teid_sequence_predictability_index
 
 
 
 def nediscover():
 	try:
 		while True:
-			choice = raw_input("\033[37m(\033[0m\033[2;31mnediscover\033[0m\033[37m)>\033[0m ")
+			choice = input("\033[37m(\033[0m\033[2;31mnediscover\033[0m\033[37m)>\033[0m ")
 			if choice == 'help' or choice == '?':
 				gtpmain.helpmenu()
 			elif choice == 'show options':
@@ -41,15 +42,15 @@ def nediscover():
 			elif 'back' in choice:
 				gtpmain.gtpattacksv2()
 			elif 'exit' in choice:
-				print '\nYou are now exiting SigPloit...'
+				print('\nYou are now exiting SigPloit...')
 				time.sleep(1)
 				sys.exit(0)
 			else:
-				print '\033[31m[-]Error:\033[0m invalid command, choose one of the below commands\n'
+				print('\033[31m[-]Error:\033[0m invalid command, choose one of the below commands\n')
 				gtpmain.helpmenu()
 
 	except Exception as e:
-		print "\033[31m[-]Error:\033[0mGTP Nodes Discovery Failed to Launch, " + str(e)
+		print("\033[31m[-]Error:\033[0mGTP Nodes Discovery Failed to Launch, " + str(e))
 		time.sleep(2)
 		gtpmain.gtpattacksv2()
 	
@@ -58,7 +59,7 @@ def nediscover():
 def teidiscover():
 	try:
 		while True:
-			choice = raw_input("\033[37m(\033[0m\033[2;31mnediscover\033[0m\033[37m)>\033[0m ")
+			choice = input("\033[37m(\033[0m\033[2;31mnediscover\033[0m\033[37m)>\033[0m ")
 			if choice == 'help' or choice == '?':
 				gtpmain.helpmenu()
 			elif choice == 'show options':
@@ -76,19 +77,49 @@ def teidiscover():
 			elif 'back' in choice:
 				gtpmain.gtpattacksv2()
 			elif 'exit' in choice:
-				print '\nYou are now exiting SigPloit...'
+				print('\nYou are now exiting SigPloit...')
 				time.sleep(1)
 				sys.exit(0)
 			else:
-				print '\033[31m[-]Error:\033[0m invalid command, choose one of the below commands\n'
+				print('\033[31m[-]Error:\033[0m invalid command, choose one of the below commands\n')
 				gtpmain.helpmenu()
 
 	except Exception as e:
-		print "\033[31m[-]Error:\033[0mGTP Nodes Discovery Failed to Launch, " + str(e)
+		print("\033[31m[-]Error:\033[0mGTP Nodes Discovery Failed to Launch, " + str(e))
 		time.sleep(2)
 		gtpmain.gtpattacksv2()
 
 def teidpredict():
+	try:
+		while True:
+			choice = input("\033[37m(\033[0m\033[2;31mteidpredict\033[0m\033[37m)>\033[0m ")
+			if choice == 'help' or choice == '?':
+				gtpmain.helpmenu()
+				print("     \033[34mset config\033[0m                  path to a file of >=6 consecutive TEIDs (hex, one per line)")
+			elif choice == 'show options':
+				gtpmain.showOptions(gtpmain.config_file,gtpmain.remote_net,gtpmain.listening,gtpmain.verbosity,gtpmain.output_file)
+			elif 'set config' in choice:
+				gtpmain.config_file = choice.split()[2]
+			elif 'set target' in choice:
+				gtpmain.remote_net = choice.split()[2]
+			elif 'set verbosity' in choice:
+				gtpmain.verbosity= int(choice.split()[2])
+			elif 'run' in choice:
+				teid_sequence_predictability_index.main(['-t', gtpmain.config_file])
+			elif 'back' in choice:
+				gtpmain.gtpinfo()
+				return
+			elif 'exit' in choice:
+				print('\nYou are now exiting SigPloit...')
+				time.sleep(1)
+				sys.exit(0)
+			else:
+				print('\033[31m[-]Error:\033[0m invalid command, choose one of the below commands\n')
+				gtpmain.helpmenu()
 
-	script = "teid_sequence_predictability_index.py"
-	print 'teidpredict'
+	except SystemExit:
+		raise
+	except Exception as e:
+		print("\033[31m[-]Error:\033[0mTEID Predictability Failed to Launch, " + str(e))
+		time.sleep(2)
+		gtpmain.gtpinfo()

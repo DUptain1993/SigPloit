@@ -1,0 +1,13 @@
+# SIP INVITE Flood configuration
+# Used by: SIP > Denial of Service > INVITE Flood
+#
+# Target S-CSCF/IMS core is set from the attack shell with: set target <ip>
+[GENERIC]
+port = 5060
+local_host = 10.0.0.1
+local_port = 0
+domain = ims.mnc001.mcc001.3gppnetwork.org
+from_user = sigploit
+to_user = 1000
+count = 200
+timeout = 2
