@@ -162,8 +162,6 @@ def mainMenu():
     print("1) GTP".rjust(8) + "\t\t3G/4G Data attacks")
     print("2) Diameter".rjust(13) + "\t\t4G Data attacks")
     print("3) SIP".rjust(8) + "\t\t4G IMS attacks")
-    print("4) 5G".rjust(8) + "\t\t5G Core (SBA/HTTP2 & PFCP/N4) attacks")
-
     print()
     print("or quit to exit SigPloit\n".rjust(28))
 
@@ -186,16 +184,12 @@ def mainMenu():
         print("\033[34m[*]\033[0mGoing back to Main Menu")
         time.sleep(2)
         mainMenu()
-    elif choice == "4":
-        os.system('clear')
-        import fivegmain
-        fivegmain.fivegattacks()
     elif choice == "quit" or choice == "exit":
         print('\nYou are now exiting SigPloit...')
         time.sleep(1)
         sys.exit(0)
     else:
-        print('\n\033[31m[-]Error:\033[0m Please Enter a Valid Choice (0 - 4)')
+        print('\n\033[31m[-]Error:\033[0m Please Enter a Valid Choice (0 - 3)')
         time.sleep(2)
         mainMenu()
 
