@@ -1,0 +1,12 @@
+# SIP REGISTER Subscriber Enumeration configuration
+# Used by: SIP > Information Gathering > REGISTER Enumeration
+#
+# Target registrar is set from the attack shell with: set target <registrar-ip>
+[GENERIC]
+port = 5060
+local_host = 10.0.0.1
+local_port = 0
+domain = ims.mnc001.mcc001.3gppnetwork.org
+ext_start = 1000
+ext_end = 1020
+timeout = 3

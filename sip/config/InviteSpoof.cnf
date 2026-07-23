@@ -1,0 +1,14 @@
+# SIP INVITE Identity Spoofing configuration
+# Used by: SIP > Interception > INVITE Spoofing
+#
+# Target S-CSCF/IMS core is set from the attack shell with: set target <ip>
+[GENERIC]
+port = 5060
+local_host = 10.0.0.1
+local_port = 0
+domain = ims.mnc001.mcc001.3gppnetwork.org
+# identity being impersonated (the "victim" caller ID)
+spoofed_user = 1001
+# callee
+to_user = 1000
+timeout = 3

@@ -1,0 +1,11 @@
+# Diameter Peer Discovery configuration
+# Used by: Diameter > Information Gathering > Peer Discovery
+#
+# Target host/subnet is set from the attack shell with: set target <ip|cidr>
+[GENERIC]
+port = 3868
+use_sctp = false
+origin_host = sigploit.example.com
+origin_realm = example.com
+host_ip = 10.0.0.1
+timeout = 5

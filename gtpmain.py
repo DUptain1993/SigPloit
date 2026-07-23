@@ -11,6 +11,7 @@ import time
 import sys
 import gtp.info
 import gtp.fraud
+import gtp.dos
 import sigploit
 
 
@@ -31,6 +32,7 @@ def gtpinfo():
     print("   --------                             ------------")
     print("0) GTP Nodes Discovery".rjust(25) + "\t\tNE Discovery, using: EchoRequest,CreateSession,DeleteSession or DeleteBearer Messages")
     print("1) TEID Allocation Discovery".rjust(31) + "\t\tTEID Discovery, using: CreateSession,ModifyBearer or CreateBearer Messages")
+    print("2) TEID Predictability".rjust(25) + "\t\tTEID sequence predictability index, using a file of captured TEIDs")
 
     print()
     print("or type back to go back to Attacks Menu".rjust(42))
@@ -41,10 +43,12 @@ def gtpinfo():
         gtp.info.nediscover()
     elif choice == "1":
         gtp.info.teidiscover()
+    elif choice == "2":
+        gtp.info.teidpredict()
     elif choice == "back":
         gtpattacksv2()
     else:
-        print('\n\033[31m[-]Error:\033[0m Please Enter a Valid Choice (0-1)')
+        print('\n\033[31m[-]Error:\033[0m Please Enter a Valid Choice (0-2)')
         time.sleep(1.5)
         gtpinfo()
 
@@ -73,6 +77,33 @@ def gtpfraud():
 
 
 
+def gtpdos():
+    os.system('clear')
+    print(" \033[31mDenial of Service\033[0m ".center(105, "#"))
+    print(" \033[34mSelect an Attack from the below\033[0m ".center(105, "#"))
+    print()
+    print("   Attacks".rjust(10) + "\t\t\t\tDescription")
+    print("   --------                             ------------")
+    print("0) Massive DoS".rjust(17) + "\t\tMass subscriber DoS via DeleteSession/DeleteBearer, MassiveDoS.cnf")
+    print("1) User DoS".rjust(14) + "\t\tSingle-subscriber DoS via DeleteSession/DeleteBearer, UserDoS.cnf")
+
+    print()
+    print("or type back to go back to Attacks Menu".rjust(42))
+
+    choice = input("\033[37m(\033[0m\033[2;31mdos\033[0m\033[37m)>\033[0m ")
+
+    if choice == "0":
+        gtp.dos.mdos()
+    elif choice == "1":
+        gtp.dos.udos()
+    elif choice == "back":
+        gtpattacksv2()
+    else:
+        print('\n\033[31m[-]Error:\033[0m Please Enter a Valid Choice (0-1)')
+        time.sleep(1.5)
+        gtpdos()
+
+
 def gtpattacksv2():
     os.system('clear')
 
@@ -80,6 +111,7 @@ def gtpattacksv2():
     print()
     print("0) Information Gathering".rjust(27))
     print("1) Fraud".rjust(11))
+    print("2) Denial of Service".rjust(23))
     print()
     print("or type back to return to the main menu".rjust(42))
     print()
@@ -91,10 +123,12 @@ def gtpattacksv2():
         gtpinfo()
     elif choice == "1":
         gtpfraud()
+    elif choice == "2":
+        gtpdos()
     elif choice == 'back':
         sigploit.mainMenu()
     else:
-        print('\n\033[31m[-]Error:\033[0m Please Enter a Valid Choice (0-1)')
+        print('\n\033[31m[-]Error:\033[0m Please Enter a Valid Choice (0-2)')
         time.sleep(1.5)
         gtpattacksv2()
 

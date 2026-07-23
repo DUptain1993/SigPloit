@@ -32,12 +32,33 @@ SigPloit is referenced in GSMA document FS.07 "SS7 and Sigtran Network Security"
   
   Version 3: Diameter
   -----------------
-  This Version will focus on the attacks occurring on the LTE roaming interconnects using Diameter as the signaling protocol.
-  
+  This Version focuses on the attacks occurring on the LTE roaming interconnects using
+  Diameter (S6a/S6d, TS 29.272) as the signaling protocol:
+
+    A- Information Gathering: Peer Discovery (CER/CEA handshake, reports S6a support)
+
+    B- Location Tracking: Authentication-Information-Request (AIR) - retrieves EPS
+       authentication vectors for a subscriber
+
+    C- Interception: Update-Location-Request (ULR) - registers an attacker MME for
+       the subscriber (SMS/data interception)
+
+    D- Denial of Service: Cancel-Location (CLR) / Purge-UE (PUR) - detach a
+       subscriber from the network
+
   Version 4: SIP
   ------------
-  This is Version will be concerned with SIP as the signaling protocol used in the access layer for voice over LTE(VoLTE) and IMS infrastructure.
-  Also, SIP will be used to encapsulate SS7 messages (ISUP) to be relayed over VoIP providers to SS7 networks taking advantage of SIP-T protocol, a protocol extension for SIP to provide intercompatability between VoIP and SS7 networks
+  This Version covers SIP as the signaling protocol used in the access layer for
+  voice over LTE (VoLTE) and IMS infrastructure:
+
+    A- Information Gathering: OPTIONS-based IMS core node discovery, and
+       REGISTER-based subscriber/extension enumeration
+
+    B- Interception: INVITE identity spoofing (forged From / P-Asserted-Identity)
+
+    C- Denial of Service: INVITE flood (call-state exhaustion)
+
+  SIP will also be used to encapsulate SS7 messages (ISUP) to be relayed over VoIP providers to SS7 networks taking advantage of SIP-T protocol, a protocol extension for SIP to provide intercompatability between VoIP and SS7 networks
   
   Version 5: Reporting
   ------------------

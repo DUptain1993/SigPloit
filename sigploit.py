@@ -176,15 +176,13 @@ def mainMenu():
         os.system('clear')
         prep()
     elif choice == "2":
-        print("\n\033[34m[*]\033[0mDiameter will be updated in version 3 release..")
-        print("\033[34m[*]\033[0mGoing back to Main Menu")
-        time.sleep(2)
-        mainMenu()
+        os.system('clear')
+        import diametermain
+        diametermain.diameterattacks()
     elif choice == "3":
-        print("\n\033[34m[*]\033[0mSIP will be updated in version 4 release..")
-        print("\033[34m[*]\033[0mGoing back to Main Menu")
-        time.sleep(2)
-        mainMenu()
+        os.system('clear')
+        import sipmain
+        sipmain.sipattacks()
     elif choice == "4":
         os.system('clear')
         import fivegmain

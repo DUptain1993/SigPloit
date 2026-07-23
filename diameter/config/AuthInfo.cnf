@@ -1,0 +1,19 @@
+# S6a Authentication-Information-Request (AIR) configuration
+# Used by: Diameter > Location Tracking > Authentication Info (AIR)
+#
+# Target HSS is set from the attack shell with: set target <hss-ip>
+[GENERIC]
+port = 3868
+use_sctp = false
+origin_host = sigploit.example.com
+origin_realm = example.com
+host_ip = 10.0.0.1
+dest_host =
+dest_realm = epc.mnc001.mcc001.3gppnetwork.org
+timeout = 5
+
+[IES]
+imsi = 001010000000001
+mcc = 001
+mnc = 01
+num_vectors = 1
