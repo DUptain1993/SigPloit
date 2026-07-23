@@ -64,7 +64,7 @@ class parseConfigs(object):
         '''
        
         self.__msgs = []
-        if config_file is None or config_file is "":
+        if config_file is None or config_file == "":
             raise Exception("No config file provided")
         self.__cfg = config_file
         self.__configs = {'interface': None,

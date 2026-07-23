@@ -48,7 +48,7 @@ SigPloit is referenced in GSMA document FS.07 "SS7 and Sigtran Network Security"
 ## Installation and requirements
 The requirements for this project are:
 
-    1) Python 2.7
+    1) Python 3.6 +
     2) Java version 1.7 +
     3) sudo apt-get install lksctp-tools
     4) Linux machine
@@ -57,6 +57,6 @@ To run use
 
     cd SigPloit
     
-    sudo pip2 install -r requirements.txt
+    sudo pip3 install -r requirements.txt
     
-    python sigploit.py
+    python3 sigploit.py
