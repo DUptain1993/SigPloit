@@ -52,16 +52,11 @@ def main(config_file, remote_net, listening=True, verbosity=2,
 
     found = []
     for host in hosts:
-        conn = open_s6a(cfg, host, TAG)
+        conn, header, avps = open_s6a(cfg, host, TAG)
         if conn is None:
             logNormal('%s: no Diameter response' % host, verbose=verbose, TAG=TAG)
             continue
-        # re-run CER to inspect the CEA content for reporting
-        cea = conn.capabilities_exchange()
         conn.close()
-        if cea is None:
-            continue
-        header, avps = cea
         oh = A.find_avp(avps, C.AVP_ORIGIN_HOST)
         orlm = A.find_avp(avps, C.AVP_ORIGIN_REALM)
         origin_host = oh['value'].decode('utf-8', 'replace') if oh else ''

@@ -37,7 +37,12 @@ def result_code(avps):
 
 
 def open_s6a(cfg, host, tag):
-    '''Connect + CER handshake. Returns a connected DiameterConnection or None.'''
+    '''
+    Connect + CER handshake (performed exactly once per connection, per
+    RFC 6733). Returns ``(conn, cea_header, cea_avps)`` or ``(None, None,
+    None)``. Callers needing the CEA content (e.g. peer discovery) should use
+    the returned header/avps directly rather than re-running the handshake.
+    '''
     conn = DiameterConnection(host, cfg.port, origin_host=cfg.origin_host,
                               origin_realm=cfg.origin_realm, host_ip=cfg.host_ip,
                               use_sctp=cfg.use_sctp, timeout=cfg.timeout)
@@ -45,16 +50,16 @@ def open_s6a(cfg, host, tag):
         conn.connect()
     except OSError as e:
         logNormal('%s: connect failed (%s)' % (host, e), verbose=True, TAG=tag)
-        return None
+        return None, None, None
     cea = conn.capabilities_exchange()
     if cea is None:
         logNormal('%s: no CEA (not a Diameter peer?)' % host, verbose=True, TAG=tag)
         conn.close()
-        return None
-    header, _ = cea
+        return None, None, None
+    header, avps = cea
     logInfo('%s: CER/CEA ok (%s, app=%d)'
             % (host, header['command_name'], header['application_id']), TAG=tag)
-    return conn
+    return conn, header, avps
 
 
 def send_and_report(conn, host, message, tag, success_msg, recommendation):

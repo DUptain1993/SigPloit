@@ -43,7 +43,7 @@ def main(config_file, target, listening=True, verbosity=2, output_file=None,
 
     results = []
     for host in targets(target):
-        conn = open_s6a(cfg, host, TAG)
+        conn, _, _ = open_s6a(cfg, host, TAG)
         if conn is None:
             continue
         try:
