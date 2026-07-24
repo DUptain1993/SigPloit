@@ -213,6 +213,15 @@ For more realistic 5G-core and EPC testing, deploy a lab core such as
 network/VM, and point the Diameter/PFCP/SBA attacks at it. Setting up those
 projects is outside SigPloit's scope — see their own documentation.
 
+### 5d. Ready for a real network?
+
+The virtual lab and mock targets above cover practicing the tool itself.
+When you're ready to test against an actual operator or interconnect —
+which always requires signed, explicit authorization — see
+[`NETWORK_ACCESS.md`](NETWORK_ACCESS.md) for who to go through (the
+operator directly, a GRX/IPX carrier, GSMA) and what that process looks
+like.
+
 ---
 
 ## 6. Legal notice

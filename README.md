@@ -109,6 +109,7 @@ run entirely on `localhost`.
 |---|---|
 | [`docs/PREREQUISITES.md`](docs/PREREQUISITES.md) | OS/runtime requirements, installing Python & system dependencies, which package each module needs, troubleshooting install failures, the virtual lab. |
 | [`docs/USAGE.md`](docs/USAGE.md) | Launching SigPloit, the CLI shell model, a full menu map, a per-attack walkthrough (menu path, config fields, example commands) for every module, the `.cnf` format, output files, and safe local-testing recipes. |
+| [`docs/NETWORK_ACCESS.md`](docs/NETWORK_ACCESS.md) | How to get **legitimate, authorized** access to a real interconnect/operator network to test against — engaging an operator directly, going through a GRX/IPX carrier, GSMA's coordination role, and a pre-engagement checklist. |
 
 ## Project structure
 
@@ -137,8 +138,10 @@ against a network you own/control or one you have explicit written
 authorization to test — several attacks (GTP/Diameter/SIP/PFCP DoS) can
 disrupt real subscriber service if pointed at production infrastructure
 without authorization. See [`docs/USAGE.md#responsible-use`](docs/USAGE.md#responsible-use)
-for details, and the [virtual lab](docs/PREREQUISITES.md#5-optional-the-virtual-lab-no-live-telecom-access-required)
-for how to practice safely.
+for details, the [virtual lab](docs/PREREQUISITES.md#5-optional-the-virtual-lab-no-live-telecom-access-required)
+for how to practice safely, and
+[`docs/NETWORK_ACCESS.md`](docs/NETWORK_ACCESS.md) for how to obtain
+legitimate access to a real network when you're ready to move beyond the lab.
 
 ## Contributors
 

@@ -34,7 +34,9 @@ against:
 - A network/lab you own or control (see
   [the virtual lab section](PREREQUISITES.md#5-optional-the-virtual-lab-no-live-telecom-access-required)), or
 - A production or partner network you have **explicit, written authorization**
-  to test (e.g. a signed penetration-testing engagement).
+  to test (e.g. a signed penetration-testing engagement — see
+  [`NETWORK_ACCESS.md`](NETWORK_ACCESS.md) for how that access is actually
+  obtained, and from whom).
 
 Several attacks are denial-of-service by design (GTP DoS, Diameter
 Cancel-Location/Purge-UE, SIP INVITE flood, PFCP session DoS) — running them
