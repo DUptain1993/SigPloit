@@ -68,12 +68,20 @@ sudo apt-get install -y python3 python3-pip default-jre lksctp-tools build-essen
 git clone https://github.com/DUptain1993/SigPloit.git
 cd SigPloit
 
-# 3. python deps
-sudo pip3 install -r requirements.txt
+# 3. python deps — into a venv (recommended; avoids install/run environment mismatches)
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 
-# 4. run it
+# 4. run it (same shell, venv still active)
 python3 sigploit.py
 ```
+
+> Installing with `sudo pip3 install ...` instead works too, but **don't mix
+> it with an active venv** — see
+> [`docs/PREREQUISITES.md`](docs/PREREQUISITES.md#3-python-dependencies) if
+> you hit `ModuleNotFoundError` right after a pip install that said it
+> succeeded.
 
 You'll land on the main menu:
 

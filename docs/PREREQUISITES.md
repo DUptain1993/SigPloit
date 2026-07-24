@@ -58,19 +58,40 @@ cd SigPloit
 
 ## 3. Python dependencies
 
-Install everything with:
-
-```bash
-sudo pip3 install -r requirements.txt
-```
-
-If you'd rather not install as root, use a virtual environment instead:
+**Recommended: install into a virtual environment.** This keeps SigPloit's
+dependencies isolated from your system Python and avoids the "it installed
+but Python still can't find it" problem entirely:
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+python3 sigploit.py    # run from the SAME shell, with the venv still active
 ```
+
+Every time you come back to a new terminal, re-run `source .venv/bin/activate`
+before `python3 sigploit.py` — the venv only affects the shell it's activated
+in.
+
+**Alternative: install system-wide (no venv).** If you don't want a venv at
+all, install directly for the system Python:
+
+```bash
+sudo pip3 install -r requirements.txt
+python3 sigploit.py
+```
+
+> ⚠️ **Do not mix the two.** If you have a venv activated (your prompt shows
+> `(.venv)`), do **not** run `sudo pip3 install ...` — `sudo` uses the
+> system's `pip3`, not the venv's, so the packages install into the system
+> Python while your active venv's `python3` still can't see them. This is the
+> single most common cause of `ModuleNotFoundError: No module named
+> 'configobj'` (or `colorama`, `IPy`, etc.) **immediately after** a pip
+> install that reported success. Pick one approach — venv *or* `sudo`
+> system-wide — and use `pip`/`pip3` consistently with it for the whole
+> install + run cycle. See
+> [Troubleshooting installation problems](#troubleshooting-installation-problems)
+> if you're already stuck in this state.
 
 ### What each dependency is for
 
@@ -97,8 +118,27 @@ here's the minimum you need per module:
 | 5G — PFCP attacks | `configobj`, `IPy` |
 | 5G — SBA attacks (NRF Discovery, NF Access) | `httpx[http2]` |
 
-### Troubleshooting `pysctp` / `IPy` install failures
+### Troubleshooting installation problems
 
+- **`ModuleNotFoundError: No module named 'configobj'` (or `colorama`,
+  `IPy`, `httpx`, ...) immediately after `pip install` reported success**:
+  almost always the venv/`sudo` mismatch described above — you have a venv
+  activated but ran `sudo pip3 install`, which installed into the system
+  Python instead. Fix it by installing into whichever Python you're actually
+  running with:
+  ```bash
+  # if you see (.venv) in your prompt, install WITHOUT sudo, using the venv's own pip:
+  pip install -r requirements.txt
+
+  # confirm which python3/pip you're using, if unsure:
+  which python3
+  which pip3
+  python3 -c "import sys; print(sys.executable)"
+  ```
+  `which python3` and `python3 -c "...sys.executable"` should print the
+  same interpreter you installed the packages for. If they don't match, one
+  of them is picking up a different Python than the other — usually because
+  a venv is (or isn't) active in the shell where you ran `pip`.
 - **`pysctp` fails to build**: this almost always means `lksctp-tools` (and
   its headers) aren't installed. Install `lksctp-tools` (Debian/Ubuntu) or
   `lksctp-tools-devel` (Fedora) and retry.
@@ -110,6 +150,10 @@ here's the minimum you need per module:
 - **Building in a minimal/CI container**: install `build-essential` (or your
   distro's C compiler + Python headers package, e.g. `python3-dev`) before
   `pip install`.
+- **`SyntaxWarning: invalid escape sequence` when launching**: harmless —
+  it comes from Python 3.12+ warning about the ASCII-art banner string, not
+  from anything functional. Fixed in current `main`; update if you still see
+  it.
 
 ---
 

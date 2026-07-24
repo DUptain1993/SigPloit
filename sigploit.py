@@ -26,7 +26,7 @@ from pyfiglet import figlet_format
 
 
 def banner(word):
-    letterforms = '''\
+    letterforms = r'''\
        |       |       |       |       |       |       | |
   XXX  |  XXX  |  XXX  |   X   |       |  XXX  |  XXX  |!|
   X  X |  X  X |  X  X |       |       |       |       |"|

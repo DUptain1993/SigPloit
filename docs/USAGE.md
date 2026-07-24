@@ -599,6 +599,7 @@ you're done.
 
 | Symptom | Cause / fix |
 |---|---|
+| `ModuleNotFoundError: No module named 'configobj'` (or similar) right after a successful-looking `pip install` | Almost always a venv/`sudo` mismatch — `sudo pip3 install` installed into the system Python, not your active venv (or vice versa). See [Troubleshooting installation problems](PREREQUISITES.md#troubleshooting-installation-problems). |
 | `ModuleNotFoundError: No module named 'httpx'` | Only the 5G SBA attacks (NRF Discovery, NF Access) need it — install with `pip3 install "httpx[http2]"`, or ignore if you only need PFCP attacks. |
 | SS7 attack does nothing / `java: command not found` | Install a JRE (see [prerequisites](PREREQUISITES.md#1-system-requirements)). |
 | Discovery attack finds nothing | Confirm the target is reachable (`ping`, or check firewall/NAT) and that you're using the right port for the protocol (GTP-C 2123, Diameter 3868, SIP 5060, PFCP 8805) — the shipped configs default to the standard port but can be overridden in the `.cnf`. |
